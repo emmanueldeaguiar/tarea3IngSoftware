@@ -4,15 +4,17 @@ Created on Jan 28, 2015
 @author: Emmanuel
 '''
 import unittest
+from estacionamiento import *
 
 
-class Test(unittest.TestCase):
+class TestReservar(unittest.TestCase):
 
 
-    def testName(self):
-        pass
-
-
-if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
-    unittest.main()
+    def testReservarExiste(self):
+        reservar(6,7)
+        
+    def testReservarPuesto(self):
+        self.assertEqual(reservar(6, 7), True)
+        
+    def testReservarFueraHorario(self):
+        self.assertFalse(reservar(3,7))
