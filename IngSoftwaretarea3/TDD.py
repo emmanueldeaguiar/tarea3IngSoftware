@@ -11,10 +11,17 @@ class TestReservar(unittest.TestCase):
 
 
     def testReservarExiste(self):
-        reservar(6,7)
+        reserva = Reserva(6,7)
+        reservar(reserva)
         
     def testReservarPuesto(self):
-        self.assertEqual(reservar(6, 7), True)
+        reserva = Reserva(6,7)
+        self.assertEqual(reservar(reserva), True)
         
     def testReservarFueraHorario(self):
-        self.assertFalse(reservar(3,7))
+        reserva = Reserva(3,7)
+        self.assertFalse(reservar(reserva))
+        
+    def testReservarHorasIntercambiadas(self):
+        reserva = Reserva(8,7)
+        self.assertFalse(reservar(reserva))
