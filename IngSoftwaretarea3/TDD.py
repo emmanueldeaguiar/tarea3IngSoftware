@@ -37,8 +37,23 @@ class TestReservar(unittest.TestCase):
         self.assertEqual(est.reservas[0].getInicio(),7)
         self.assertEqual(est.reservas[0].getFin(),12)
         
-    def testComprobarDisponibilidadIntervalo(self):
-        reserva = Reserva(7,12)
+    def testBuscarSuperposicionesExiste(self):
         est = Estacionamiento(10)
-        est.comprobarDisponibilidad(est.reservas)
+        est.buscarSuperposiciones(est.reservas)
+        
+    def testBuscarrSuperposiciones(self):
+        est = Estacionamiento(10)
+        r1 = Reserva(7,12)
+        r2 = Reserva(7,12)
+        r3 = Reserva(7,12)
+        r4 = Reserva(7,12)
+        r5 = Reserva(7,12)
+        r6 = Reserva(7,12)
+        r7 = Reserva(7,12)
+        r8 = Reserva(7,12)
+        r9 = Reserva(7,12)
+        r10 = Reserva(7,12)
+        est.reservas = [r1,r2,r3,r4,r5,r6,r7,r8,r9,r10]
+        self.assertEqual(est.buscarSuperposiciones(est.reservas),[10,7,12])
+        
         

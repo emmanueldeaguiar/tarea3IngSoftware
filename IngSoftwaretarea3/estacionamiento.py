@@ -4,9 +4,7 @@ Created on 27/1/2015
 @author: Daniel Pelayo
          Emanuel De Aguiar
 '''
-from test.test_buffer import cap
-class Reserva(object):
-    
+class Reserva(object):    
 
     def __init__(self, inicio, fin):
         self.__inicio = int(inicio)
@@ -16,15 +14,60 @@ class Reserva(object):
     def getFin(self):
         return self.__fin
     
+class Tupla(object):
+    
+    def __init__(self,offset,tipo):
+        self.__offset = int(offset)
+        self.__tipo = int(tipo)
+    
+    def getOffset(self):
+        return self.__offset
+    
+    def getTipo(self):
+        return self.__tipo
+    
 class Estacionamiento(object):
     
     def __init__(self,cap):
         self.capacidad = cap
         self.reservas = []
+    
+    '''Metodo creado a partir del algoritmo de Marzullo'''
+    def buscarSuperposiciones(self,reservas_en_estacionamiento):
+        best = 0
+        cnt = 0
+        beststart = 0
+        bestend = 0
+        p = 0
+        tuplas = []
+        '''Se convierten las reservas en el formato Tupla: <offset,tipo>'''
+        for r in reservas_en_estacionamiento:
+            pi = Tupla(r.getInicio(),-1)
+            pf = Tupla(r.getFin(),+1)
+            tuplas.append(pi)
+            tuplas.append(pf)
         
-    def comprobarDisponibilidad(self,lista):
+        '''Ordeno la lista de tuplas'''
+        self.ordenarTuplas(tuplas) 
+           
+        while p < len(tuplas):
+            cnt = cnt - tuplas[p].getTipo()
+            if cnt > best:
+                best = cnt
+                beststart = tuplas[p].getOffset()
+                if p < len(tuplas) -1:
+                    bestend = tuplas[p+1].getOffset()                
+            else:
+                pass             
+            p+=1
+            
+        superposicion = [best,beststart,bestend]
+        return superposicion
+    
+    '''Ordena las tuplas segun el algoritmo de Marzullo'''
+    def ordenarTuplas(self,listaDeTuplas):
         pass
-
+    
     def reservar(self,intervalo):
         if (intervalo.getInicio()<6) or (intervalo.getFin() > 18):
             print('El estacionamiento solo funciona de 6 a 18')
