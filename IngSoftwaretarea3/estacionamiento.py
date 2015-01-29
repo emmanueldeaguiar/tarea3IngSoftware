@@ -66,7 +66,22 @@ class Estacionamiento(object):
     
     '''Ordena las tuplas segun el algoritmo de Marzullo'''
     def ordenarTuplas(self,listaDeTuplas):
-        pass
+        tam = len(listaDeTuplas)
+        for i in range(1,tam):
+            for j in range(0,tam-i):
+                if(listaDeTuplas[j].getOffset() > listaDeTuplas[j+1].getOffset()):
+                    k = listaDeTuplas[j+1]
+                    listaDeTuplas[j+1] = listaDeTuplas[j]
+                    listaDeTuplas[j] = k;     
+        for j in range(1,tam):
+            for i in range(0,tam-1):
+                if(listaDeTuplas[i].getOffset() == listaDeTuplas[i+1].getOffset()):
+                    if(listaDeTuplas[i].getTipo() == -1 and listaDeTuplas[i+1].getTipo() == 1 ):
+                        k = listaDeTuplas[i+1]
+                        listaDeTuplas[i+1] = listaDeTuplas[i]
+                        listaDeTuplas[i] = k; 
+                    elif(listaDeTuplas[i].getTipo() == 1 and listaDeTuplas[i+1].getTipo() == -1 ):
+                        pass
     
     def reservar(self,intervalo):
         if (intervalo.getInicio()<6) or (intervalo.getFin() > 18):
@@ -77,5 +92,6 @@ class Estacionamiento(object):
             return False
             
         self.reservas.append(intervalo)
+        superposicion = self.buscarSuperposiciones(self.reservas)
         return True
         
