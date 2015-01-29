@@ -93,5 +93,13 @@ class Estacionamiento(object):
             
         self.reservas.append(intervalo)
         superposicion = self.buscarSuperposiciones(self.reservas)
-        return True
+        if superposicion[0] <= self.capacidad:
+            print()
+            print('Su reservacion se ha realizado con exito. Hora Entrada: %s, Hora Salida: %s' %(intervalo.getInicio(),intervalo.getFin()))
+            return True
+        else:
+            print()
+            print('NO HAY PUESTOS DISPONIBLES PARA ESTE HORARIO DE RESERVA.')
+            self.reservas.pop()
+            return False
         

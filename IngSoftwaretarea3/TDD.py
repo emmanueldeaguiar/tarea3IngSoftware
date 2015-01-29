@@ -56,7 +56,7 @@ class TestReservar(unittest.TestCase):
         est.reservas = [r1,r2,r3,r4,r5,r6,r7,r8,r9,r10]
         self.assertEqual(est.buscarSuperposiciones(est.reservas),[10,7,12])
     
-    def testReservarEstacionamientoLleno(self): #Caso de Prueba Frontera
+    def testReservar_EstacionamientoLleno(self): #Caso de Prueba Frontera
         est = Estacionamiento(10)
         r1 = Reserva(7,12)
         r2 = Reserva(7,12)
@@ -71,6 +71,31 @@ class TestReservar(unittest.TestCase):
         r11 = Reserva(7,12)
         est.reservas = [r1,r2,r3,r4,r5,r6,r7,r8,r9,r10]
         self.assertFalse(est.reservar(r11))
+        
+    def testReservar_EstacionamientoCasiLleno(self): #Caso de Prueba Frontera
+        est = Estacionamiento(10)
+        r1 = Reserva(7,12)
+        r2 = Reserva(7,12)
+        r3 = Reserva(7,12)
+        r4 = Reserva(7,12)
+        r5 = Reserva(7,12)
+        r6 = Reserva(7,12)
+        r7 = Reserva(7,12)
+        r8 = Reserva(7,12)
+        r9 = Reserva(7,12)
+        r10 = Reserva(7,12)
+        est.reservas = [r1,r2,r3,r4,r5,r6,r7,r8,r9]
+        self.assertTrue(est.reservar(r10))
+        
+    def testReservar_EstacionamientoVacio(self): #Caso de Prueba Frontera
+        est = Estacionamiento(10)        
+        r1 = Reserva(7,12)
+        self.assertTrue(est.reservar(r1))
+        
+    def testReservarHoraImposible(self): #Caso de Prueba Frontera
+        est = Estacionamiento(10)        
+        r1 = Reserva(7,7)
+        self.assertFalse(est.reservar(r1))
         
     
         
