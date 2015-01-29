@@ -87,7 +87,7 @@ class Estacionamiento(object):
         if (intervalo.getInicio()<6) or (intervalo.getFin() > 18):
             print('El estacionamiento solo funciona de 6 a 18')
             return False
-        elif(intervalo.getFin()<intervalo.getInicio()):
+        elif(intervalo.getFin()<=intervalo.getInicio()):
             print('La hora de entrada debe ser menor que la hora de salida.')
             return False
             

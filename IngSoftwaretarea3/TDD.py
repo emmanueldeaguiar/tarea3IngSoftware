@@ -97,6 +97,19 @@ class TestReservar(unittest.TestCase):
         r1 = Reserva(7,7)
         self.assertFalse(est.reservar(r1))
         
+    def testReservarHorasLimite(self):  #Caso de Prueba Frontera
+        est = Estacionamiento(10)
+        r1 = Reserva(6,18)
+        self.assertTrue(est.reservar(r1))
+        
+    def testReservarPuestoJusto(self): #Case por malicia
+        est = Estacionamiento(1)
+        r1 = Reserva(6,9)
+        r2 = Reserva(11,15)
+        r3 = Reserva(9,11)
+        est.reservas = [r1,r2]
+        self.assertTrue(est.reservar(r3))
+        
     
         
         
