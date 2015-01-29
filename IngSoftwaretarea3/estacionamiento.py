@@ -1,8 +1,8 @@
 '''
 Created on 27/1/2015
 
-@author: Daniel Pelayo
-         Emanuel De Aguiar
+@author: Daniel Pelayo         10-10539
+@author: Emanuel De Aguiar     10-10179
 '''
 class Reserva(object):    
 
